@@ -80,13 +80,11 @@ describe('#cleanAssets', () => {
       connections: propertiesToExclude.map((prop) => `options.${prop}`)
     };
 
-    const result = cleanAssets(assets, { EXCLUDED_PROPS });
-    console.log({ result });
-    const { connections } = result;
+    const { connections } = cleanAssets(assets, { EXCLUDED_PROPS });
     expect(connections).to.have.lengthOf(1);
 
     propertiesToExclude.forEach((prop) => {
-      expect(connections[0].options).to.not.haveOwnProperty(prop);
+      expect(connections[0].options).to.not.haveOwnProperty(prop);// Asser
     });
     expect(connections[0].options).to.haveOwnProperty('domain');// Assert that there are non-excluded properties in the options object
   });

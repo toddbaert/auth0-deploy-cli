@@ -28,11 +28,14 @@ export default class BrandingHandler extends DefaultHandler {
   async processChanges(assets) {
     const { branding } = assets;
 
+    // remove templates, they exist on the the branding object in context.assets but cannot be added to the settings API call.
+    const brandingWithoutTemplates = { ...branding };
+    delete brandingWithoutTemplates.templates;
     // Do nothing if not set
-    if (!branding || !Object.keys(branding).length) return;
+    if (!brandingWithoutTemplates || !Object.keys(brandingWithoutTemplates).length) return;
 
-    await this.client.branding.updateSettings({}, branding);
+    await this.client.branding.updateSettings({}, brandingWithoutTemplates);
     this.updated += 1;
-    this.didUpdate(branding);
+    this.didUpdate(brandingWithoutTemplates);
   }
 }

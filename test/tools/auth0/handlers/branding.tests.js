@@ -19,13 +19,14 @@ describe('#branding handler', () => {
       });
     });
 
-    it('should update branding settings', async () => {
+    it('should update branding settings, removing template property', (done) => {
       const auth0 = {
         branding: {
           updateSettings: (params, data) => {
             expect(data).to.be.an('object');
+            expect(data.templates).to.equal(undefined);
             expect(data.logo_url).to.equal('https://example.com/logo.png');
-            return Promise.resolve(data);
+            done();
           }
         }
       };
@@ -33,8 +34,15 @@ describe('#branding handler', () => {
       const handler = new branding.default({ client: auth0 });
       const stageFn = Object.getPrototypeOf(handler).processChanges;
 
-      await stageFn.apply(handler, [
-        { branding: { logo_url: 'https://example.com/logo.png' } }
+      stageFn.apply(handler, [
+        {
+          branding: {
+            logo_url: 'https://example.com/logo.png',
+            templates: {
+              universalLogin: '<html></html>'
+            }
+          }
+        }
       ]);
     });
   });

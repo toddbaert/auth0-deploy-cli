@@ -31,6 +31,7 @@
   "dependencies": {
     "ajv": "^6.12.6",
     "auth0": "^2.40.0",
+    "change-case": "^4.1.2",
     "dot-prop": "^5.2.0",
     "fs-extra": "^7.0.0",
     "global-agent": "^2.1.12",

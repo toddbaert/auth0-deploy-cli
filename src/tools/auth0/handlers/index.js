@@ -24,6 +24,7 @@ import * as actions from './actions';
 import * as triggers from './triggers';
 import * as organizations from './organizations';
 import * as attackProtection from './attackProtection';
+import * as brandingTemplates from './brandingTemplates';
 
 export {
   rules,
@@ -51,5 +52,6 @@ export {
   actions,
   triggers,
   organizations,
-  attackProtection
+  attackProtection,
+  brandingTemplates
 };
